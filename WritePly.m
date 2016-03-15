@@ -19,7 +19,6 @@ function WritePly( Verts, Colours, Faces, FileName, UV=[], texim='')
   assert(size(Verts,1)==size(Colours,1) || numel(Colours)==0, ...
          "WritePly: Verts and Colours must be the same size");
          
-  
   fd = fopen(FileName, 'w+');
   fprintf(fd, 'ply\n');
   fprintf(fd, 'format ascii 1.0\n');
