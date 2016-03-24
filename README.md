@@ -2,7 +2,7 @@
 
 ## Introduction
 This code is an octave and c++ implementation of the paper
- *"Fitting quadrics with a Bayesian prior"* - Daniel Beale et al.
+ *"Fitting quadrics with a Bayesian prior"* - Daniel Beale, Yong-Liang Yang, Neill Campbell, et al.
 
 ## Installation
 The software requires the matrix library Eigen in order to compile. Eigen can be found at [https://bitbucket.org/eigen/eigen/](https://bitbucket.org/eigen/eigen/), or installed using homebrew. 

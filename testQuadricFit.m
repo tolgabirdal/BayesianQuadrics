@@ -29,7 +29,11 @@ WritePly(Data',80*ones(size(Data')), [], 'Output/Samples.ply');
 
 % For values of sigma between 1 and 100, fit a quadric.
 for prior = 1 : 10 : 100
-  [Afit bfit cfit] = QuadricFit( Data, struct("sigma",prior, "Mu", 20*eye(3)), "MVN" );
+  Params = struct;
+  Params.sigma = prior;
+  Params.Mu = 20*eye(3);
+  
+  [Afit bfit cfit] = QuadricFit( Data, Params, "MVN" );
   
   [f, v] =  PlotQuadricFromUnitCircle(Afit, bfit, cfit);
   
