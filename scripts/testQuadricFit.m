@@ -14,6 +14,8 @@ pkg load statistics;
 
 mkdir Output
 
+addpath('../bin');
+
 
 % Generate an arbitrary quadric and write to file
 [A,b,c] = GenerateQuadric(0.01*eye(3),20, 0.01*eye(3), 0.01);

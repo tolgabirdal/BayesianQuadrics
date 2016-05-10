@@ -3,20 +3,25 @@ CXX:=clang++
 LFLAGS:="`mkoctfile -p LFLAGS` -O2 -std=c++11"
 CXXFLAGS:="`mkoctfile -p CXXFLAGS` -O2 -std=c++11"
 
-INCLUDES:=/usr/local/Cellar/eigen/3.2.6/include/eigen3/
+INCLUDES:=/usr/local/Cellar/eigen/3.2.8/include/eigen3/
 
-all: Quadric.oct GenerateUnitSphere.oct
+all: bindir Quadric.oct GenerateUnitSphere.oct mvbinaries
 	
-GenerateUnitSphere.oct: GenerateUnitSphere.cpp
+GenerateUnitSphere.oct: src/GenerateUnitSphere.cpp
 	DL_LD=${CXX} CXX=${CXX} LFLAGS=${LFLAGS} CXXFLAGS=${CXXFLAGS} mkoctfile $< -o $@ -v
 	
-Quadric.oct : QuadricOct.cpp Quadric.cpp Matrix.cpp 
+Quadric.oct : src/QuadricOct.cpp src/Quadric.cpp src/Matrix.cpp 
 	DL_LD=${CXX} CXX=${CXX} LFLAGS=${LFLAGS} CXXFLAGS=${CXXFLAGS} mkoctfile -I${INCLUDES} $^ -o $@ -v
 	
-mex: QuadricOct.cpp Quadric.cpp Matrix.cpp 
+mex: src/QuadricOct.cpp src/Quadric.cpp src/Matrix.cpp 
 	DL_LD=${CXX} CXX=${CXX} LFLAGS=${LFLAGS} CXXFLAGS=${CXXFLAGS} mkoctfile --mex -I${INCLUDES} $^ -o Quadric.mex -v
 
+bindir:
+	-mkdir bin
+
+mvbinaries:
+	mv *.oct bin
+	mv *.o bin
+
 clean:
-	-rm *.o
-	-rm *.oct
-	-rm *.mex
+	-rm -rf bin

@@ -18,7 +18,7 @@ Enter the 'BayesianQuadrics' directory and run
 > make
 
 ## Tests
-From octave run,
+From octave, enter the scripts directory and run,
 > testQuadricFit
 
 The code will generate an Output directory and a collection of ply files containing the points generated on the test quadric, and the fitted surfaces.
