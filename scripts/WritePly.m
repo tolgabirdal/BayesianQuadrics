@@ -5,9 +5,12 @@
 %   Verts   - Mx3 matrix of verteces
 %   Colours - Mx3 matrix of colours
 %   Faces   - Nx3 indexes in to the vertecies, a triangle for each face
+%   FilenName - The file to write to
+%   UV - Mx2 matrix of texture coordintates. These should be between 0 and 1. (optional)
+%   texim - Path to the texture file
 %
 % Output:
-%   -
+%   None
 %
 function WritePly( Verts, Colours, Faces, FileName, UV=[], texim='')
   assert(size(Verts,2)==3, ...

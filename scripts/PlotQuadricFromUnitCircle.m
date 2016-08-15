@@ -1,7 +1,22 @@
 %
 % Generate vertices and faces using the unit circle as a starting point.
-% The function currently only plots ellpsoids.
 %
+% The function currently only plots ellipsoids.
+%
+% The quadric is of the form,
+%   x'Ax + b'x + c
+%
+% Input:
+%   A - 3x3 matrix
+%   b - 3x1 vector
+%   c - a scalar
+%   N - square root of the number of points on the surface
+%   MinSigma - prevent eigenvalues of A from going below this number.
+%
+% Output:
+%   f - 3xK matrix of faces
+%   v - 3xN matrix of vertices
+% 
 
 function [f, v] =  PlotQuadricFromUnitCircle(A, b, c, N=50, MinSigma=1e-8)
   [M,~] = size(A);

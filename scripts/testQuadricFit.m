@@ -33,7 +33,7 @@ WritePly(Data',80*ones(size(Data')), [], 'Output/Samples.ply');
 for prior = 1 : 10 : 100
   Params = struct;
   Params.sigma = prior;
-  Params.Mu = 20*eye(3);
+  Params.Mu = eye(3);
   
   [Afit bfit cfit] = QuadricFit( Data, Params, "MVN" );
   

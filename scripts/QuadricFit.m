@@ -1,20 +1,22 @@
 %
-% Fit a general quadric to data. Either using a Bayesian
-% method, with a wishart prior; or a lagrangian method.
+% Fit a general quadric to data.
+%
+% The code is from the paper,
+%   "Fitting quadrics with a Bayesian prior" - D Beale, YL Yang, N Campbell, D Cosker, P Hall - Computational Visual Media, 2016
 %
 % Input:
 %   Data   - MxN matrix of datapoints
 %   Params - A struct containing
-%            V, n   - MxM array, value, parameters for the wishart prior
-%            lambda - the lagrangian multiplier
-%   method - Can be one of "bayes" or "lagrange"
+%            sigma - The noise hyper parameter
+%            Mu    - The mean matrix (usually the identity)
+%   method - Can be one of "MVN", "lietal" or "none"
 %
 % Output:
 %   A - MxM matrix
 %   b - Mx1 vector
 %   c - 1x1 value
 %
-function [A b c] = QuadricFit( Data, Params, method="bayes" )
+function [A b c] = QuadricFit( Data, Params, method="MVN" )
   [M N] = size(Data);
   if( N < 6 )
     warning("QuadricFit: The system is underconstrained");
@@ -22,15 +24,9 @@ function [A b c] = QuadricFit( Data, Params, method="bayes" )
   
   % Create parameters from struct
   switch method
-    case "bayes"
-      V = Params.V;
-      n = Params.n;
-      assert(all([size(V)]==M), "QuadricFit: Incorrect dimensions");
     case "MVN"
       sigma = Params.sigma;
       Mu = Params.Mu;
-    case "lagrange"
-      lambda = Params.lambda;
     case "lietal"
     case "none"
     otherwise
@@ -42,45 +38,11 @@ function [A b c] = QuadricFit( Data, Params, method="bayes" )
   S = DataToScatter(Data, M);
   
   switch method
-    case "bayes"
-      p = M;
-      %EI = zeros(Mp+M+1, Mp+M+1);
-      %EI(1:Mp,1:Mp) = eye(Mp);
-      %Op = 2*S-EI*(n-p-1);
-      %a = pinv(Op)*[MatrixToVector(V);zeros(M+1,1)];
-      As = eye(M);
-      err = inf;
-      tol = 1e-3;
-      iter = 0;
-      while err > tol
-        a = 0.5*inv(S)*[-MatrixToVector(inv(V)) + ...
-                        (n-p-1)*MatrixToVector(inv(As));...
-                        zeros(M+1,1)];
-        [As, bs, cs] = GetParameters( a, M, Mp );
-        err = mean(FindErrors(Data, As, bs, cs).^2);
-        if(iter > 500)
-          warning('QuadricFit: Bayes failed to converge');
-          break
-        end
-        iter = iter + 1;
-      end
     case "MVN"
       EI = zeros(Mp+M+1, Mp+M+1);
       vvv=MatrixToVector(2*ones(M,M)-eye(M,M));
       EI(1:Mp,1:Mp) = diag(vvv);
       a=pinv((sigma^2)*S + EI)*[MatrixToVector(Mu + Mu' - diag(diag(Mu)));zeros(M+1,1)];
-    case "lagrange"
-      NumberOfSamples = 10000; % A hard parameter
-      RandomWhite = randn(NumberOfSamples,M);
-      
-      [Lambda RW] = DataToScatter(RandomWhite',M);
-      
-      L = zeros(Mp+M+1,Mp+M+1);
-      L(1:Mp,1:Mp) = Lambda(1:Mp,1:Mp);
-
-      % Build the Lagrangian
-      s2 = ones(NumberOfSamples,1);
-      a = -2*lambda*inv(S + lambda*L) * [RW(:,1:Mp)'*s2;zeros(M+1,1)];
     case "lietal"
       Di = [Data(1,:)'.^2, ...
             Data(2,:)'.^2, ...
@@ -106,7 +68,6 @@ function [A b c] = QuadricFit( Data, Params, method="bayes" )
       aa = U(:,ii);
       aa2 = -(D(7:10,7:10)\D(7:10,1:6))*aa;
       aa3 = [aa;aa2];
-      
     case "none"
       [Ui Si] = eig(S);
       [~,ii] = min(diag(abs(Si)));

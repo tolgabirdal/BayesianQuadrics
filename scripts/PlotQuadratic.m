@@ -1,5 +1,20 @@
 %
-% Plots an iso surface on to the current figure.
+% Plots a quadric iso surface on to the current figure, of the form
+%   x'Ax + bx + c = 0
+%
+% Input:
+%   A - 3x3 matrix
+%   b - 3x1 vector
+%   c - scalar
+%   x - a vector specifying the x range for the plot
+%   y - a vector specifying the y range for the plot
+%   z - a vector specifying the z range for the plot
+%   colour - 
+%
+% Output:
+%   c - 3xN matrix of vertices
+%   f - 3xK matrix of faces
+%   c - 3xN matrix of colours
 %
 
 function [f, v, c] = PlotQuadratic( A, b, c, x, y, z, colour='k' )
