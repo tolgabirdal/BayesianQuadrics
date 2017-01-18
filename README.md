@@ -6,7 +6,7 @@ This code is an octave and c++ implementation of the paper
 
 The library documentation can be found at [dabeale.github.io/BayesianQuadrics](http://dabeale.github.io/BayesianQuadrics).
 
-<img style="float:right" width="500px" src="doc/QuadricFit.png" />
+<img style="float:right" width="500px" src="doc/QuadricFitExamples.png" />
 
 ## Installation
 The software requires the matrix library Eigen in order to compile. Eigen can be found at [bitbucket.org/eigen/eigen/](https://bitbucket.org/eigen/eigen/), or installed using homebrew. 
