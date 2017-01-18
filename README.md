@@ -7,6 +7,7 @@ More information can be found in the paper,
  * ["Fitting quadrics with a Bayesian prior" - Daniel Beale et al. Journal of Computational Visual Media, 2016.](http://link.springer.com/article/10.1007/s41095-016-0041-9)
 
 **Quadric fitting examples**
+
 <img alt="Quadric fitting examples" style="float:right" width="500px" src="doc/QuadricFitExamples.png" />
 
 The library documentation can be found at [dabeale.github.io/BayesianQuadrics](http://dabeale.github.io/BayesianQuadrics).
