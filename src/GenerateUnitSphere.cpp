@@ -8,14 +8,14 @@ struct Td
   double x;
   double y;
   double z;
-};
+}; ///< A double precision 3D point
 
 struct Ti
 {
   uint32_t x;
   uint32_t y;
   uint32_t z;
-};
+}; ///< An integer 3D point
 
 Td GeneratePoint(const double& theta, const double& phi)
 {
@@ -28,6 +28,11 @@ Td GeneratePoint(const double& theta, const double& phi)
   return pt;
 }
 
+/**
+ * @brief GenerateUnitSphere (octave function)
+ * Create a mesh representation of the unit sphere. 
+ * The sphere has N^2 vertices.
+ */
 DEFUN_DLD(GenerateUnitSphere, args, , 
           "[v f] = GenerateUnitSphere( N )")
 {

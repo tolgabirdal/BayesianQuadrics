@@ -24,8 +24,12 @@ void handler(int sig)
   fprintf(stderr, "Error: signal %d:\n", sig);
   backtrace_symbols_fd(array, size, STDERR_FILENO);
   exit(1);
-}
+} ///< Handle an error signal
 
+/**
+ * @brief Quadric (octave function)
+ * Fit a quadric to some data. 
+ */
 DEFUN_DLD(Quadric, args, , "[A b c] = Quadric( Data, sigma ) ")
 {
   signal(SIGSEGV, handler);   // install our handler
