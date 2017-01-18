@@ -2,19 +2,19 @@
 
 ## Introduction
 This code is an octave and c++ implementation of the paper
- * [http://link.springer.com/article/10.1007/s41095-016-0041-9]("Fitting quadrics with a Bayesian prior"* - Daniel Beale et al. Journal of Computational Visual Media, 2016.)
+ * ["Fitting quadrics with a Bayesian prior"* - Daniel Beale et al. Journal of Computational Visual Media, 2016.](http://link.springer.com/article/10.1007/s41095-016-0041-9)
 
-The library documentation can be found at [http://dabeale.github.com/BayesianQuadrics](http://dabeale.github.com/BayesianQuadrics).
+The library documentation can be found at [dabeale.github.io/BayesianQuadrics](http://dabeale.github.io/BayesianQuadrics).
 
 ## Installation
-The software requires the matrix library Eigen in order to compile. Eigen can be found at [https://bitbucket.org/eigen/eigen/](https://bitbucket.org/eigen/eigen/), or installed using homebrew. 
+The software requires the matrix library Eigen in order to compile. Eigen can be found at [bitbucket.org/eigen/eigen/](https://bitbucket.org/eigen/eigen/), or installed using homebrew. 
 
 Edit the makefile and change 
 > INCLUDES:=/usr/local/Cellar/eigen/3.2.6/include/eigen3/ 
 
 to the correct directory for the eigen header files.
 
-GNU Octave must be installed in order to run the tests. It can be downloaded from [https://www.gnu.org/software/octave/](https://www.gnu.org/software/octave/), or installed using homebrew for mac. The statistics package is required (`pkg -forge install statistics`).
+GNU Octave must be installed in order to run the tests. It can be downloaded from [www.gnu.org/software/octave/](https://www.gnu.org/software/octave/), or installed using homebrew for mac. The statistics package is required (`pkg -forge install statistics`).
 
 Enter the 'BayesianQuadrics' directory and run
 > make
