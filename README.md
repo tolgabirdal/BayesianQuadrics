@@ -1,12 +1,15 @@
 # BayesianQuadrics
 
 ## Introduction
-This code is an octave and c++ implementation of the paper
+The code in this repository was created to fit quadrics to point clouds which have large portions of noisy, or missing data, such as the example in the image below. In this scenario fitting an unconstrained quadric could lead to an undesirable surface, for example, a hyperboloid, flattened ellipsoid or plane. One way to constrain the surface is to fit it using a probabilistic model with a Bayesian prior over the surface parameters.
+
+More information can be found in the paper,
  * ["Fitting quadrics with a Bayesian prior" - Daniel Beale et al. Journal of Computational Visual Media, 2016.](http://link.springer.com/article/10.1007/s41095-016-0041-9)
 
-The library documentation can be found at [dabeale.github.io/BayesianQuadrics](http://dabeale.github.io/BayesianQuadrics).
+**Quadric fitting examples**
+<img alt="Quadric fitting examples" style="float:right" width="500px" src="doc/QuadricFitExamples.png" />
 
-<img style="float:right" width="500px" src="doc/QuadricFitExamples.png" />
+The library documentation can be found at [dabeale.github.io/BayesianQuadrics](http://dabeale.github.io/BayesianQuadrics).
 
 ## Installation
 The software requires the matrix library Eigen in order to compile. Eigen can be found at [bitbucket.org/eigen/eigen/](https://bitbucket.org/eigen/eigen/), or installed using homebrew. 
