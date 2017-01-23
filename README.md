@@ -15,14 +15,12 @@ The image below gives an example of some data extracted on the roof of a phone b
 The library documentation can be found at [dabeale.github.io/BayesianQuadrics](http://dabeale.github.io/BayesianQuadrics).
 
 ## Installation
-The software requires the matrix library Eigen in order to compile. Eigen can be found at [bitbucket.org/eigen/eigen/](https://bitbucket.org/eigen/eigen/), or installed using homebrew. 
+First clone the git repository using the command,
+> git --recursive clone https://github.com/dabeale/BayesianQuadrics
 
-Edit the makefile and change 
-> INCLUDES:=/usr/local/Cellar/eigen/3.2.6/include/eigen3/ 
+Note that the '--recursive' flag is required to clone the Eigen dependency, which is included at a submodule. If Eigen is already installed on your machine, edit the 'INCLUDES' variable in 'makefile'.
 
-to the correct directory for the eigen header files.
-
-GNU Octave must be installed in order to run the tests. It can be downloaded from [www.gnu.org/software/octave/](https://www.gnu.org/software/octave/), or installed using homebrew for mac. The statistics package is required (`pkg -forge install statistics`).
+GNU Octave must be installed in order to compile the software. It can be downloaded from [www.gnu.org/software/octave/](https://www.gnu.org/software/octave/), or installed using homebrew for mac. The statistics package is required (`pkg -forge install statistics`).
 
 Enter the 'BayesianQuadrics' directory and run
 > make
