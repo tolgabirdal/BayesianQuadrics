@@ -5,7 +5,7 @@ CXXFLAGS:="`mkoctfile -p CXXFLAGS` -O2 -std=c++11"
 
 INCLUDES:=libs/eigen/
 
-octexistence:=$(shell which mkoctfil | wc -c | sed "s/ //g")
+octexistence:=$(shell which mkoctfile | wc -c | sed "s/ //g")
 
 targets= bindir Quadric.oct GenerateUnitSphere.oct Quadric.a mvbinaries
 ifeq ("$(octexistence)","0")
