@@ -26,7 +26,8 @@ WritePly(v',[],uint32([f(1,:); f(3,:); f(2,:)])', 'Output/Original.ply');
 % Generate some points on the surface and add gaussian noise
 sigma = 0.01;
 vtrain = v + sigma*randn(size(v));
-Data = vtrain(:,1:10:end,:);
+N = size(vtrain,2);
+Data = vtrain(:,N/2:10:N,:);
 WritePly(Data',80*ones(size(Data')), [], 'Output/Samples.ply');
 
 % For values of sigma between 1 and 100, fit a quadric.
@@ -39,20 +40,20 @@ for prior = 1 : 10 : 100
   
   [f, v] =  PlotQuadricFromUnitCircle(Afit, bfit, cfit);
   
-  WritePly(v',[],uint32([f(1,:); f(3,:); f(2,:)])', sprintf('Output/Fitted%d.ply',prior));
+  WritePly(v',[],uint32([f(1,:); f(2,:); f(3,:)])', sprintf('Output/Fitted%d.ply',prior));
 end
 
 % Fit a quadric to the data without a prior
 [Afit bfit cfit] = QuadricFit( Data, struct(), "none" );
-mi = min(Data,[],2);
-ma = max(Data,[],2);
-[f, v, c] = PlotQuadratic( Afit, bfit, cfit, ...
-                           linspace(mi(1),ma(1),40), ...
-                           linspace(mi(2),ma(2),40), ...
-                           linspace(mi(3), ma(3),40));
-WritePly(v,[],uint32([f(:,1), f(:,2), f(:,3)])-1, sprintf('Output/NoPrior.ply',prior));
+[f, v] =  PlotQuadricFromUnitCircle(Afit, bfit, cfit);
+WritePly(v',[],uint32([f(1,:); f(2,:); f(3,:)])', sprintf('Output/NoPrior.ply',prior));
 
 % Fit a quadric using the c++ implementation
 [A b c] = Quadric( Data, 10 );
 [f, v] =  PlotQuadricFromUnitCircle(A, b, c);
 WritePly(v',[],uint32([f(1,:); f(3,:); f(2,:)])', 'Output/cQuad.ply');
+
+disp("");
+disp("Output has been written to 'Output'.");
+disp("");
+
